@@ -1,0 +1,18 @@
+[Desktop Entry]
+FullScreen=false
+shouldShowMenuBarComingFromFullScreen=true
+shouldShowToolBarComingFromFullScreen=true
+
+[General]
+LockSidebar=true
+ShowSidebar=true
+
+[MainWindow]
+ToolBarsMovable=Disabled
+
+[Recent Files]
+File1[$e]=$HOME/syncthing/pdfs/C++ Primer Plus 6th Edition.pdf
+Name1[$e]=C++ Primer Plus 6th Edition.pdf
+
+[UiSettings]
+ColorScheme=Sweet

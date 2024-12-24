@@ -1,0 +1,117 @@
+/* Insert theme modifications after this */
+* {
+    red:                         rgba ( 220, 50, 47, 100 % );
+    selected-active-foreground:  rgba ( 129, 91, 164, 100 % );
+    lightfg:                     rgba ( 98, 104, 117, 100 % );
+    separatorcolor:              rgba ( 255, 255, 255, 100 % );
+    urgent-foreground:           rgba ( 239, 97, 85, 100 % );
+    alternate-urgent-background: rgba ( 97, 30, 46, 18 % );
+    lightbg:                     rgba ( 252, 232, 213, 100 % );
+    background-color:            transparent;
+    border-color:                rgba ( 255, 255, 255, 100 %);
+    normal-background:           transparent;
+    bordercolor:                 rgba ( 239, 97, 85, 21 % );
+    alternate-active-background: rgba ( 47, 30, 46, 18 % );
+    active-foreground:           rgba ( 129, 91, 164, 100 % );
+    blue:                        rgba ( 38, 139, 210, 100 % );
+    alternate-normal-foreground: transparent;
+    urgent-background:           transparent;
+    selected-normal-foreground:  White;
+    selected-active-background:  rgba ( 85, 57, 204, 33 %);
+    background:                  rgba ( 00, 00, 00, 80 % );
+    selected-urgent-background:  White;
+    active-background:           rgba ( 00, 00, 00, 80 % );
+    alternate-active-foreground: White;
+    alternate-normal-background: transparent;
+    foreground:                  rgba ( 00, 00, 00, 80 % );
+    alternate-urgent-foreground: var(urgent-foreground);
+    selected-urgent-foreground:  rgba ( 239, 97, 85, 100 % );
+    spacing:                     2;
+    normal-foreground:           var(foreground);
+    selected-normal-background:  rgba ( 85, 57, 204, 33 %);
+}
+window {
+    padding:          5;
+    background-color: var(background);
+    border:           1;
+}
+
+mainbox {
+    padding: 0;
+    border:  0;
+}
+message {
+    padding:      1px ;
+    border-color: var(separatorcolor);
+    border:       1px dash 0px 0px ;
+}
+
+textbox {
+    text-color: var(foreground);
+}
+
+
+listview {
+    padding:      2px 0px 0px ;
+    scrollbar:    true;
+    border-color: var(separatorcolor);
+    spacing:      2px ;
+    fixed-height: 0;
+    border:       1px 0px 0px ;
+}
+
+entry {
+    placeholder: "type here";
+    cursor-width: 8px;
+    cursor-color: rgba (255,255,255,100%);
+    text-color: rgba (255,255,255,60%);
+}
+element {
+  orientation: horizontal;
+  children: [ element-icon, element-text];
+  spacing: 5px;
+  padding: 1px;
+  border: 0px;
+}
+element normal.normal {
+    background-color: var(normal-background);
+    text-color:       var(normal-foreground);
+}
+element selected.normal{
+    background-color: var(selected-active-background);
+    text-color:       var(selected-active-foreground);
+}
+
+button selected {
+    background-color: var(selected-normal-background);
+    text-color:       var(selected-normal-foreground);
+}
+textbox-prompt-colon {
+    margin:     0px 0.3000em 0.0000em 0.0000em ;
+    expand:     false;
+    str:        ":";
+    text-color: White;
+}
+
+element-icon {
+    size: 1.5em;
+}
+element-text{
+    vertical-align: 0.5;
+    text-color: white;
+}
+prompt {
+    spacing:    10;
+    text-color: White;
+}
+inputbar {
+    padding:    5px ;
+    spacing:    0;
+    text-color: var(normal-foreground);
+    children:   [ "prompt","textbox-prompt-colon","entry","case-indicator" ];
+}
+
+listview {
+  lines: 8;
+}
+
