@@ -4,3 +4,12 @@
 [submodule "/home/ognjen/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = /home/ognjen/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "/home/ognjen/.tmux/plugins/tmux-ressurect"]
+	path = /home/ognjen/.tmux/plugins/tmux-ressurect
+	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule "/home/ognjen/.tmux/plugins/tpm"]
+	path = /home/ognjen/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule "/home/ognjen/.tmux/plugins/tmux-sensible"]
+	path = /home/ognjen/.tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible
