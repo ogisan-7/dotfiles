@@ -161,6 +161,9 @@ configuration {
   drun {
     display-name: "prompt";
   }
+  dmenu {
+      display-name: "clipboard";
+  }
 }
 
 @theme "archsan"
