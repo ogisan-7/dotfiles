@@ -31,26 +31,25 @@ button:hover {
 }
 
 #lock {
-    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+    background-image: image(url("icons/lock-svgrepo-com.svg"));
 }
 
 #logout {
-    background-position: center;
-    background-image: image(url("/home/ognjen/Downloads/logout.png"), url("/home/ognjen/Downloads/logout.png"));
+    background-image: image(url("icons/logout-svgrepo-com\(1\).svg"))
 }
 
 #suspend {
-    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+    background-image: image(url("icons/minus-circle-svgrepo-com.svg"), url("/usr/local/share/wlogout/icons/suspend.png"));
 }
 
 #hibernate {
-    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+    background-image: image(url("icons/pause-svgrepo-com.svg"), url("/usr/local/share/wlogout/icons/suspend.png"));
 }
 
 #shutdown {
-    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+    background-image: image(url("icons/remove-circle-svgrepo-com.svg"))
 }
 
 #reboot {
-    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+    background-image: image(url("icons/rotate-counterclockwise-svgrepo-com.svg"))
 }
