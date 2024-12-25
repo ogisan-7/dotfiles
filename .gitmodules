@@ -1,0 +1,6 @@
+[submodule "/home/ognjen/.oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+	path = /home/ognjen/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "/home/ognjen/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = /home/ognjen/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-autosuggestions
