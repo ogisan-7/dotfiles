@@ -77,6 +77,7 @@ plugins=(git colorize tmux themes sudo colored-man-pages zsh-autosuggestions zsh
 source $ZSH/oh-my-zsh.sh
 
 alias config='git --git-dir="$HOME/dotfiles" --work-tree="$HOME"'
+alias doom='$HOME/.config/emacs/bin/doom'
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
