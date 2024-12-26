@@ -2,9 +2,11 @@
     "notifyAboutUpdates": true,
     "autoUpdate": true,
     "autoUpdateNotification": true,
-    "useQuickCss": false,
+    "useQuickCss": true,
     "themeLinks": [],
-    "enabledThemes": [],
+    "enabledThemes": [
+        "rose-pine.css"
+    ],
     "enableReactDevtools": false,
     "frameless": false,
     "transparent": false,
@@ -218,7 +220,7 @@
         "ImageZoom": {
             "enabled": true,
             "size": 933.3333374023438,
-            "zoom": 3.3999999999999995,
+            "zoom": 2.2,
             "nearestNeighbour": false,
             "square": false,
             "saveZoomValues": true,
@@ -1221,7 +1223,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1734973824804
+        "settingsSyncVersion": 1735183661761
     },
     "enabledThemeLinks": [],
     "ignoreResetWarning": false,
