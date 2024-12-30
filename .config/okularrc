@@ -12,7 +12,9 @@ ToolBarsMovable=Disabled
 
 [Recent Files]
 File1[$e]=$HOME/syncthing/pdfs/C++ Primer Plus 6th Edition.pdf
+File2[$e]=$HOME/Books/RE4B-EN.pdf
 Name1[$e]=C++ Primer Plus 6th Edition.pdf
+Name2[$e]=RE4B-EN.pdf
 
 [UiSettings]
 ColorScheme=Sweet
