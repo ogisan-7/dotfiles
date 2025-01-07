@@ -1,7 +1,16 @@
 return {
     {
+        "lopi-py/luau-lsp.nvim",
+    },
+    {
+        "ckipp01/stylua-nvim",
+        config = function()
+        end
+    },
+    {
         "folke/neoconf.nvim",
         config = function()
+            require("neoconf").setup({})
         end
     },
     {
@@ -17,11 +26,81 @@ return {
         opts = {},
     },
 
+    -- Autocompletion
     {
-        "lopi-py/luau-lsp.nvim"
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp",
+
+        config = function()
+            require("luasnip").setup({})
+            vim.api.nvim_set_keymap('i', '<C-k>', '<cmd>lua require("luasnip").expand_or_jump()<CR>',
+                { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('s', '<C-k>', '<cmd>lua require("luasnip").expand_or_jump()<CR>',
+                { noremap = true, silent = true })
+
+            local ls = require('luasnip')
+            local s = ls.snippet
+            local t = ls.text_node
+            local i = ls.insert_node
+            local d = ls.dynamic_node
+            local f = ls.function_node
+
+            -- Define a helper function to duplicate placeholder content
+            local function duplicate(index)
+                return d(index, function(args)
+                    return sn(nil, { i(1, args[1][1]) }) -- Mirror the content of the placeholder
+                end, { index })
+            end
+
+            local function copy(args)
+                return args[1]
+            end
+            ls.add_snippets({ "lua", "luau" }, {
+                -- Function snippet
+                ls.add_snippets("luau", {
+                    s("func", {
+                        t("function "), i(1, "name"), t("("), i(2, "args"), t({ ")", "    " }),
+                        i(3, ""),
+                        t({ "", "end" })
+                    }),
+                    s("if", {
+                        t("if "), i(1, "condition"), t({ " then", "    " }),
+                        i(2, ""),
+                        t({ "", "end" })
+                    }),
+                    s("for", {
+                        t("for "), i(1, "i"), t(", "), i(2, "v"), t(" in "), i(3, "pairs(table)"), t({ " do", "    " }),
+                        i(4, ""),
+                        t({ "", "end" })
+                    }),
+                    s("while", {
+                        t("while "), i(1, "condition"), t({ " do", "    " }),
+                        i(2, ""),
+                        t({ "", "end" })
+                    }),
+                    s("repeat", {
+                        t({ "repeat", "    " }),
+                        i(1, ""),
+                        t({ "", "until " }), i(2, "condition")
+                    }),
+                    s("class", {
+                        t("local "), i(1, "ClassName"), t(" = {}"),
+                        t({ "", "" }),
+                        f(copy, 1), t(".__index = "), f(copy, 1),
+                        t({ "", "" }),
+                        t("function "), f(copy, 1), t({ ".new()", "    " }),
+                        t("local self = setmetatable({}, "), f(copy, 1), t({ ")", "    " }),
+                        t("return self"),
+                        t({ "", "end", "" }),
+                    }),
+                })
+            })
+        end
     },
 
-    -- Autocompletion
     {
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
@@ -31,15 +110,16 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-
         },
+
+
         config = function()
             local cmp = require('cmp')
             local cmp_window = require "cmp.config.window"
 
-
             cmp.setup({
                 sources = {
+                    { name = 'luasnip' },
                     { name = 'nvim_lsp' },
                 },
                 mapping = cmp.mapping.preset.insert({
@@ -53,7 +133,8 @@ return {
                 }),
                 snippet = {
                     expand = function(args)
-                        vim.snippet.expand(args.body)
+                        -- vim.snippet.expand(args.body)
+                        require('luasnip').lsp_expand(args.body)
                     end,
                 },
 
@@ -62,6 +143,7 @@ return {
                     documentation = cmp_window.bordered(),
                 },
                 formatting = {
+                    expandable_indicator = true,
                     fields = { "kind", "abbr", "menu" },
                     max_width = 0,
                     kind_icons = require("icons"),
@@ -164,6 +246,7 @@ return {
                 lsp_defaults.capabilities,
                 require('cmp_nvim_lsp').default_capabilities()
             )
+            lsp_defaults.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
 
             -- LspAttach is where you enable features that only work
             -- if there is a language server active in the file
@@ -195,47 +278,67 @@ return {
                     function(server_name)
                         require('lspconfig')[server_name].setup({})
                     end,
+
                     ["luau_lsp"] = function()
                         require("luau-lsp").setup({
-
-                            sourcemap = {
-                                enabled = false,
-                            },
                             platform = {
                                 type = "roblox",
                             },
                             types = {
                                 roblox_security_level = "PluginSecurity",
                             },
+
+                            completion = {
+                                enabled = true,
+                                addParentheses = true,
+                                addTabstopAfterParentheses = true,
+                                autocompleteEnd = true,
+                                fillCallArguments = true,
+                                showPropertiesOnMethodCall = true,
+                                imports = {
+                                    enabled = true,
+                                },
+                            },
+
+                            sourcemap = {
+                                enabled = true,
+                                autogenerate = true, -- automatic generation when the server is attached
+                                rojo_project_file = "default.project.json",
+                                sourcemap_file = "sourcemap.json",
+                            },
+
                             plugin = {
                                 enabled = true,
                                 port = 3667,
                             },
+
                             fflags = {
                                 sync = true,               -- sync currently enabled fflags with roblox's published fflags
                                 override = {
                                     LuauSolverV2 = "True", -- enable the new solver
                                 },
                             },
+
                             server = {
+                                filetypes = { "luau" },
                                 settings = {
                                     -- https://github.com/folke/neoconf.nvim/blob/main/schemas/luau_lsp.json
                                     ["luau-lsp"] = {
                                         completion = {
+                                            enabled = true,
                                             addParentheses = true,
                                             addTabstopAfterParentheses = true,
                                             autocompleteEnd = true,
-                                            enabled = true,
                                             fillCallArguments = true,
+                                            showPropertiesOnMethodCall = true,
                                             imports = {
                                                 enabled = true,
                                             },
-                                        }
+                                        },
                                     },
                                 },
-                                capabilites = lsp_defaults.capabilities
+                                capabilities = lsp_defaults.capabilities,
                             },
-
                         })
                     end
 
